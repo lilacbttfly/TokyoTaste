@@ -1,0 +1,102 @@
+@model IEnumerable<App.Models.Produto>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<img src="~/imagens/banner1.png" class="d-block w-100">
+<hr>
+<img src="~/imagens/CARDAPIO.png" class="d-block mx-auto" style="width: 25%;">
+
+<HR>
+<div class="container align-items-center justify-content-center text-center">
+    <div>
+        <div class="card-container d-flex flex-wrap mx-auto">
+            @foreach (var item in Model)
+            {
+                <div class="card d-flex border-0 mx-auto">
+                    <img src="@item.Foto" class="card-image">
+                    <div class="card-text">
+                        <h3 class="card-title fonte-nova">@item.ProdutoNome</h3>
+                        <p class="card-price fonte-cool">Preço: R$ @item.Preco.ToString("F2")</p>
+                        <div class="card-actions">
+                            <button type="button" style="border: none; background: none; padding: 0;" data-bs-toggle="modal"
+                                data-bs-target="#imagemModal_@item.ProdutoNome">
+                                <img class="btn w-75" src="~/imagens/Botão 1.png" alt="Entrar">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="imagemModal_@item.ProdutoNome">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content bg-black bg-opacity-75"
+                            style="backdrop-filter: blur(5px); box-shadow: 0px 4px 16px #FA5E64; border: 2px solid #D6242B">
+                            <a class="btn-close" data-bs-dismiss="modal"></a>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="@item.Foto" class="img-fluid" style="max-width: 100%; height: auto;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="ms-3 d-flex flex-column justify-content-center text-white">
+                                            <div class="text-center">
+                                                <h1 class="fonte-nova text-danger">@item.ProdutoNome</h1>
+                                                <p class="fonte-cool">R$ @item.Preco.ToString("F2")</p>
+                                            </div>
+                                            <hr>
+                                            <p class="fonte-cool">@item.Descricao</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+<style>
+    hr {
+        border-top: 1px dashed #f00;
+        border-bottom: 1px solid #f00;
+        color: #fff;
+        background-color: #fff;
+        height: 30px;
+    }
+
+    .card {
+        width: 250px;
+        border: 1px solid #ccc;
+        margin: 10px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-image {
+        width: 249px;
+        height: 295px;
+    }
+
+    .card-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        flex-grow: 1;
+    }
+
+    .card-title {
+        font-size: 50px;
+    }
+</style>

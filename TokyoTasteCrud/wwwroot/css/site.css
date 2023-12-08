@@ -1,0 +1,74 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.fonte-nova{
+  font-family: 'Kashima Demo';
+}
+
+@font-face {
+  font-family: 'Kashima Demo';
+  src: url('Kashima\ Demo.otf');
+}
+.fonte-cool{
+  font-family: 'Coolvetica';
+}
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('coolvetica\ rg.otf');
+}
+.logo{
+  max-height: 54px;
+  width: 220px;
+}
+
+@media(min-width: 500px){
+  .logo{
+    width: 350px;
+  }
+}
+
+.only-print {
+  display: none;
+  }
+  @media print {
+  .only-print {
+  display: block;
+  }
+  .no-print {
+  display: none !important;
+  }
+  .container{
+  max-width: 100%;
+  }
+  }
+
+  .page-link {
+    color: #ff0000 !important;
+    text-decoration: none;
+    background-color: #000000 !important;
+    border: none !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+    font-family: 'Coolvetica';
+   }
+
+  .page-item.active .page-link {
+    color: #000000 !important;
+    background-color: #FF0000 !important;
+    border-color: #FF0000 !important;
+    font-family: 'Coolvetica';
+  }

@@ -1,0 +1,115 @@
+@model IEnumerable<App.Models.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    <h1 class="only-print p-2 text-center bg-primary text-white shadow rounded m-3"> Relatório
+        de produtos cadastrados</h1>
+
+    <a asp-action="Create" class=" no-print fonte-cool text-danger">Cadastre um novo produto!</a>
+    </p>
+    <form class="d-flex align-items-center custom-search-form" asp-action="Index" method="get">
+        <input type="text" name="txtFiltro" placeholder="Digite aqui o que procura" value="@ViewBag.txtFiltro"
+            class="form-control custom-search-input">
+        <button class="btn custom-search-button" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+
+    <form asp-action="Index" method="get" class="no-print">
+        <button class="btn btn-danger" type="submit" name="botao" value="Relatorio"> Relatório</button>
+
+        <button class="btn btn-danger ms-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Exportar
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            <li><button class="dropdown-item" type="submit" name="botao" value="XML"> XML</button></li>
+            <li><button class="dropdown-item" type="submit" name="botao" value="Json"> Json</button></li>
+        </ul>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th class="fonte-cool">
+                        @Html.DisplayNameFor(model => model.ProdutoNome)
+                    </th>
+                    <th class="fonte-cool d-none d-md-table-cell">
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th class="fonte-cool">
+                        @Html.DisplayNameFor(model => model.Preco)
+                    </th>
+                    <th class="fonte-cool">
+                        @Html.DisplayNameFor(model => model.Foto)
+                    </th>
+                    <th class="fonte-cool">
+                        @Html.DisplayNameFor(model => model.Categoria)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="fonte-cool">
+                            @Html.DisplayFor(modelItem => item.ProdutoNome)
+                        </td>
+                        <td class="fonte-cool d-none d-md-table-cell">
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td class="fonte-cool">
+                            @Html.DisplayFor(modelItem => item.Preco)
+                        </td>
+                        <td class="fonte-cool">
+                            <img src="@Url.Content(item.Foto)" alt="Imagem" style="height: 100px;" />
+                        </td>
+                        <td class="fonte-cool">
+                            @Html.DisplayFor(modelItem => item.Categoria.ProdutoNome)
+                        </td>
+                        <td class="no-print">
+                            <a asp-action="Edit" asp-route-id="@item.ProdutoId"><i
+                                    class="bi bi-pencil-square text-white fs-3 me-2"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.ProdutoId"><i
+                                    class="bi bi-stickies-fill text-white fs-3 ms-2 me-2"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.ProdutoId"><i
+                                    class="bi bi-trash3-fill ms-2 text-white fs-3"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<style>
+.custom-search-form {
+    background-color: black;
+    border-radius: 4px;
+    padding: 5px;
+     border: 1px solid white;
+     max-width: 800px;
+    width: 100%; 
+    margin: 0 auto 20px;;
+}
+.custom-search-input {
+    border: 2px white;
+    background-color: black;
+    color: white;
+    border-radius: 4px 2px 2px 4px;
+}
+.custom-search-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+}
+.custom-select-gray {
+    background-color: #850000; 
+    color: white;
+}
+
+</style>

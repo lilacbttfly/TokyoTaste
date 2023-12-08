@@ -1,0 +1,25 @@
+@model App.Models.Categoria
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <h1 class="text-white fonte-cool">Edite a categoria</h1>
+    <div class="row text-white">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProdutoId" />
+                <div class="form-group">
+                    <label asp-for="ProdutoNome" class="control-label">Nome da categoria</label>
+                    <input asp-for="ProdutoNome" class="form-control" />
+                    <span asp-validation-for="ProdutoNome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-danger fonte-cool mt-3" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+@model IEnumerable<App.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <p>
+        <a asp-action="Create" class=" fonte-cool text-danger">Cadastre um administrador!</a>
+    </p>
+    <div class="table-responsive">
+        <table class="table  text-white fonte-cool">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Imagem)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Login)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            <img src="@Url.Content(item.Imagem)" alt="Imagem" style="height: 100px;" />
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Login)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.UsuarioId"><i
+                                    class="bi bi-pencil-square text-white fs-3 me-2"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.UsuarioId"><i
+                                    class="bi bi-stickies-fill text-white fs-3 ms-2 me-2"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.UsuarioId"><i
+                                    class="bi bi-trash3-fill ms-2 text-white fs-3"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.password-field').each(function () {
+            var originalPassword = $(this).text();
+            var maskedPassword = '*'.repeat(originalPassword.length); // Create a string of asterisks of the same length as the password
+            $(this).text(maskedPassword); // Replace the password with asterisks
+        });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

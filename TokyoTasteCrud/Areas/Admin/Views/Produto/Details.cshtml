@@ -1,0 +1,47 @@
+@model App.Models.Produto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="container text-white fonte-cool">
+    <h1 class="text-white fonte-cool">Detalhes do prato</h1>
+    <dl class="row">
+        <dt class="col-sm-2 fonte-cool">
+            Nome do prato
+        </dt>
+        <dd class="col-sm-10 fonte-cool">
+            @Html.DisplayFor(model => model.ProdutoNome)
+        </dd>
+        <dt class="col-sm-2 fonte-cool">
+            Descrição
+        </dt>
+        <dd class="col-sm-10 fonte-cool">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2 fonte-cool">
+            Preço
+        </dt>
+        <dd class="col-sm-10 fonte-cool">
+            @Html.DisplayFor(model => model.Preco)
+        </dd>
+        <dt class="col-sm-2 fonte-cool">
+            Foto
+        </dt>
+        <dd class="col-sm-10 fonte-cool">
+            <img src="@Html.DisplayFor(model => model.Foto)" alt="Imagem" style="height: 100px;">
+
+        </dd>
+        <dt class="col-sm-2 fonte-cool">
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd class="col-sm-10 fonte-cool">
+            @Html.DisplayFor(model => model.Categoria.ProdutoNome)
+        </dd>
+    </dl>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.ProdutoId" class="btn btn-danger mt-3 fonte-cool">Voltar a editar</a>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.fonte-nova{
+  font-family: 'Kashima Demo';
+}
+
+@font-face {
+  font-family: 'Kashima Demo';
+  src: url('Kashima\ Demo.otf');
+}
+.fonte-cool{
+  font-family: 'Coolvetica';
+}
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('coolvetica\ rg.otf');
+}
+.logo{
+  max-height: 54px;
+  width: 220px;
+}
+
+@media(min-width: 500px){
+  .logo{
+    width: 350px;
+  }
+}

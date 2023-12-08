@@ -1,0 +1,64 @@
+@model IEnumerable<App.Models.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+<p>
+    <a asp-action="Create" class=" fonte-cool text-danger">Cadastre um novo produto!</a>
+</p>
+<div class="table-responsive">
+    <table class="table text-white">
+        <thead>
+            <tr>
+                <th class="fonte-cool">
+                    @Html.DisplayNameFor(model => model.ProdutoNome)
+                </th>
+                <th class="fonte-cool">
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th class="fonte-cool">
+                    @Html.DisplayNameFor(model => model.Preco)
+                </th>
+                <th class="fonte-cool">
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th class="fonte-cool">
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fonte-cool">
+                        @Html.DisplayFor(modelItem => item.ProdutoNome)
+                    </td>
+                    <td class="fonte-cool">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td class="fonte-cool">
+                        @Html.DisplayFor(modelItem => item.Preco)
+                    </td>
+                    <td class="fonte-cool">
+                        <img src="@Url.Content(item.Foto)" alt="Imagem" style="height: 100px;" />
+                    </td>
+                    <td class="fonte-cool">
+                        @Html.DisplayFor(modelItem => item.Categoria.ProdutoNome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProdutoId"><i class="bi bi-pencil-square text-white fs-3 me-2"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.ProdutoId"><i class="bi bi-stickies-fill text-white fs-3 ms-2 me-2"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.ProdutoId"><i class="bi bi-trash3-fill ms-2 text-white fs-3"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+</div>

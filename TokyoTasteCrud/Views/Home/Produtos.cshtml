@@ -1,0 +1,178 @@
+@model X.PagedList.PagedList<App.Models.Produto>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<img src="~/imagens/banner1.png" class="d-block w-100">
+<hr>
+<img src="~/imagens/CARDAPIO.png" class="d-block mx-auto" style="width: 25%;">
+
+
+<form class="d-flex align-items-center mx-auto custom-search-form" asp-action="Produtos" method="get">
+    <input type="text" name="txtFiltro" placeholder="Digite aqui o que procura" value="@ViewBag.txtFiltro"
+        class="form-control custom-search-input text-center fonte-cool">
+    <button class="btn btn-primary custom-search-button" type="submit"><i class="bi bi-search"></i></button>
+    <select name="selOrdenacao" class="form-control mx-2 fonte-cool custom-select-gray">
+        <option value="Nome" class="fonte-cool">Ordenar por ordem alfabética</option>
+        <option value="Nome_Desc" class="fonte-cool">Ordenar por menor preço</option>
+        <option value="Login" class="fonte-cool">Ordenar por maior preço</option>
+    </select>
+</form>
+
+<HR>
+<div class="container align-items-center justify-content-center text-center">
+    <div>
+        <div class="card-container d-flex flex-wrap mx-auto">
+            @foreach (var item in Model)
+            {
+                <div class="card d-flex border-0 mx-auto">
+                    <img src="@item.Foto" class="card-image">
+                    <div class="card-text">
+                        <h3 class="card-title fonte-nova">@item.ProdutoNome</h3>
+                        <p class="card-price fonte-cool">Preço: R$ @item.Preco.ToString("F2")</p>
+                        <div class="card-actions">
+                            <button type="button" style="border: none; background: none; padding: 0;" data-bs-toggle="modal"
+                                data-bs-target="#imagemModal_@item.ProdutoNome">
+                                <img class="btn w-75" src="~/imagens/Botão 1.png" alt="Entrar">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="imagemModal_@item.ProdutoNome">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content bg-black bg-opacity-75"
+                            style="backdrop-filter: blur(5px); box-shadow: 0px 4px 16px #FA5E64; border: 2px solid #D6242B">
+                            <a class="btn-close" data-bs-dismiss="modal"></a>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="@item.Foto" class="img-fluid" style="max-width: 100%; height: auto;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="ms-3 d-flex flex-column justify-content-center text-white">
+                                            <div class="text-center">
+                                                <h1 class="fonte-nova text-danger">@item.ProdutoNome</h1>
+                                                <p class="fonte-cool">R$ @item.Preco.ToString("F2")</p>
+                                            </div>
+                                            <hr>
+                                            <p class="fonte-cool">@item.Descricao</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+    <ul class="pagination c">
+        @{
+            string primeira = "";
+            string ultima = "";
+        }
+        @if (!Model.HasPreviousPage)
+            primeira = "disabled";
+        @if (!Model.HasNextPage)
+            ultima = "disabled";
+        <li class="page-item @primeira">
+
+            <a class="page-link" asp-route-pagina="1" asp-route-txtFiltro="@ViewData["txtFiltro"]">&lt;&lt;</a>
+
+        </li>
+        <li class="page-item @primeira">
+            <a class="page-link" asp-route-pagina="@(Model.PageNumber - 1)"
+                asp-route-txtFiltro="@ViewData["txtFiltro"]">&lt;</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+
+                <a class="page-link" asp-route-pagina="@i" asp-route-txtFiltro="@ViewData["txtFiltro"]">@i</a>
+
+            </li>
+        }
+        <li class="page-item @ultima">
+            <a class="page-link" asp-route-pagina="@(Model.PageNumber + 1)"
+                asp-route-txtFiltro="@ViewData["txtFiltro"]">></a>
+        </li>
+        <li class="page-item @ultima">
+
+            <a class="page-link" asp-route-pagina="@Model.PageCount" asp-route-txtFiltro="@ViewData["txtFiltro"]">>></a>
+
+        </li>
+    </ul>
+</div>
+<style>
+    hr {
+        border-top: 1px dashed #f00;
+        border-bottom: 1px solid #f00;
+        color: #fff;
+        background-color: #fff;
+        height: 30px;
+    }
+
+    .card {
+        width: 250px;
+        border: 1px solid #ccc;
+        margin: 10px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-image {
+        width: 249px;
+        height: 295px;
+    }
+
+    .card-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        flex-grow: 1;
+    }
+
+    .card-title {
+        font-size: 50px;
+    }
+    .custom-search-form {
+    background-color: black;
+    border-radius: 4px;
+    padding: 5px;
+     border: 1px solid white;
+     max-width: 800px;
+    width: 100%; 
+    margin: 0 auto 20px;;
+}
+
+.custom-search-input {
+    border: 2px white;
+    background-color: black;
+    color: white;
+    border-radius: 4px 2px 2px 4px;
+}
+
+.custom-search-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+}
+.custom-select-gray {
+    background-color: #850000; 
+    color: white;
+}
+</style>

@@ -1,0 +1,34 @@
+@model IEnumerable<App.Models.Banner>
+@{
+ViewData["Title"] = "Admin";
+}
+
+<div class="text-center">
+</div>
+<section id="meucarousel" class="carousel carousel-dark slide mt-3" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#meucarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#meucarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#meucarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="1000">
+            <img src="~/imagens/Frame181.png" class="w-100 d-block rounded-2" style="max-height: auto; width: auto; object-fit: cover;">
+        </div>
+        <div class="carousel-item">
+            <img src="~/imagens/Frame182.png" class="w-100 d-block rounded-2" style="max-height: auto; width: auto; object-fit: cover;">
+        </div>
+        <div class="carousel-item">
+            <img src="~/imagens/Frame183.png" class="w-100 d-block rounded-2" style="max-height: auto; width: auto; object-fit: cover;"> 
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#meucarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#meucarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+    </button>
+</section>
+@Html.Partial("../ParcialView/BannerCarrossel", Model)
